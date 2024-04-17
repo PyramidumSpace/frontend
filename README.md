@@ -1,2 +1,2 @@
-# Pyramidum-FE
+# frontend
 Frontend
