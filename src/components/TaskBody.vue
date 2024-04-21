@@ -1,4 +1,24 @@
-<script></script>
+<script>
+export default {
+  data() {
+    return {
+      // prioritySelected: "Low",
+      priorityOptions: [
+        { text: "Low", value: "p1" },
+        { text: "Average", value: "p2" },
+        { text: "High", value: "p3" },
+      ],
+      // taskStatusSelected: "Not started",
+      taskStatusOptions: [
+        { text: "Not started", value: "s1" },
+        { text: "In Progress", value: "s2" },
+        { text: "Done", value: "s3" },
+        { text: "Archived", value: "s4" },
+      ],
+    };
+  },
+};
+</script>
 
 <template>
   <form class="border p-2 bg-light card">
@@ -20,8 +40,9 @@ Some text</textarea
     </div>
     <div class="row">
       <div class="form-group col">
-        <label class="form-label" for="priority">Priority Level:</label
-        ><select
+        <label class="form-label" for="priority">Priority Level:</label>
+        <select
+          v-model="selected"
           class="form-select mb-2 priority"
           name="priority"
           required=""
@@ -29,24 +50,11 @@ Some text</textarea
         >
           <option
             class="priority"
-            value="p1"
             style="background-color: white; color: black"
+            v-for="option in priorityOptions"
+            :value="option.value"
           >
-            Low
-          </option>
-          <option
-            value="p2"
-            class="priority"
-            style="background-color: white; color: black"
-          >
-            Average
-          </option>
-          <option
-            value="p3"
-            class="priority"
-            style="background-color: white; color: black"
-          >
-            High
+            {{ option.text }}
           </option>
         </select>
       </div>
@@ -67,40 +75,21 @@ Some text</textarea
     <div class="row">
       <div class="form-group col-md-3">
         <label class="form-label" for="status">Task Status:</label
-        ><select
+        >
+        <select
+          v-model="selected"
           class="form-select mb-2 status"
           name="status"
-          id="status"
           required=""
           style="background-color: white; color: black"
         >
           <option
             class="status"
-            value="s1"
             style="background-color: white; color: black"
+            v-for="option in taskStatusOptions"
+            :value="option.value"
           >
-            Not started
-          </option>
-          <option
-            class="status"
-            value="s2"
-            style="background-color: white; color: black"
-          >
-            In Progress
-          </option>
-          <option
-            class="status"
-            value="s3"
-            style="background-color: white; color: black"
-          >
-            Done
-          </option>
-          <option
-            class="status"
-            value="s4"
-            style="background-color: white; color: black"
-          >
-            Archived
+            {{ option.text }}
           </option>
         </select>
       </div>
