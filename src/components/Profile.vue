@@ -30,6 +30,7 @@
 <script>
 import {useAuthStore} from "../stores/AuthStore";
 
+
 export default {
     setup(){
         const authStore = useAuthStore()
@@ -65,11 +66,14 @@ export default {
             this.edit=true;
             this.nameSuccess=null;
         },
+        isValid(){
+            return this.passwordNew != ''
+             && this.passwordOld!='' 
+             && this.passwordNew2 == this.passwordNew2
+        },
         handleSubmit(){
             this.changePass=false;
-            if (this.passwordNew != '' &&
-                this.passwordOld != '' &&
-                this.passwordNew2 != ''){
+            if (this.isValid()){
                 //отправить на бэк новый пароль
                 this.passSuccess=true;
             }
