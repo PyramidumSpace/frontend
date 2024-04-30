@@ -7,16 +7,16 @@ interface State {
 export const useAuthStore = defineStore('auth', {
     state: ():State => {
        return {
-            user: {
-                name: "",
-                email: ""
-            }
+            user: null,
        }
     },
     actions: {
         isLogin(){
             let logged = localStorage.getItem('user-info');
             return logged
+        },
+        login(name, email, password){
+
         }
     }
 })
