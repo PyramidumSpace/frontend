@@ -32,19 +32,19 @@
             }
         },
         methods: {
-            validation(){
+            isValid(){
                 this.emailError = this.email.length > 0 ? 
                 '' : 'Это поле не должно быть пустым';
                 this.passwordError = this.password.length > 0 ?
                 '' : 'Это поле не должно быть пустым';
                 this.nameError = this.name.length > 0 ?
                 '' : 'Это поле не должно быть пустым';
+                return !this.passwordError && !this.emailError && !this.nameError
             },
+            sendToBackEnd(){},
             handleSubmit(){
-                this.validation();
-                if(!this.passwordError && ! this.emailError 
-                    && !this.nameError){
-                    //здесь надо отправлять данные на БЕ
+                if(this.isValid()){
+                    this.sendToBackend()
                 }
             }
         }
