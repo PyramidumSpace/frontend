@@ -24,8 +24,8 @@
             </form>
         </div>
         <div>
-            <button @click="this.$router.push('/register')" class="btn btn-secondary">Регистрация</button>
-            <button @click="this.$router.push('/resetpassword')" class="btn btn-secondary">Забыли пароль?</button>
+            <button @click="this.$router.push({name: 'Registration'})" class="btn btn-secondary">Регистрация</button>
+            <button @click="this.$router.push({name: 'ResetPassword'})" class="btn btn-secondary">Забыли пароль?</button>
         </div>
     </div>
 </template>
@@ -42,21 +42,11 @@
         },
         methods: {
             validation() {
-                this.username_msg = '';
-                this.password_msg = '';
-                if (this.username == '') {
-                    this.username_msg = 'Пожалуйста, введите логин';
-                    if (this.password == '') {
-                        this.password_msg = 'Пожалуйста, введите пароль';
-                    }
-                }
-                else {
-                    if (this.password == '') {
-                        this.password_msg = 'Пожалуйста, введите пароль';
-                    }
-                    else {
-                        //Запрос к БД. Переход к пользовательскому окну
-                    }
+                this.username_msg = this.username === '' ? 'Пожалуйста, введите логин' : '';
+                this.password_msg = this.password === '' ? 'Пожалуйста, введите пароль' : '';
+
+                if (this.username !== '' && this.password !== '') {
+                    // Запрос к БД. Переход к пользовательскому окну
                 }
             }
         }

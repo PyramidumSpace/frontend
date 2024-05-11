@@ -7,7 +7,7 @@ import App from './App.vue'
 import Auth from './components/Auth.vue'
 import ResetPassword from './components/ResetPassword.vue'
 import ResetPasswordSuccess from "./components/ResetPasswordSuccess.vue";
-//import Registration from './components/Registration.vue'
+import Registration from './components/Registration.vue'
 
 const router = createRouter({
     routes: [{
@@ -25,11 +25,11 @@ const router = createRouter({
             name: 'ResetPasswordSuccess',
             component: ResetPasswordSuccess
         },
-        /*{
+        {
             path: '/registration',
             name: 'Registration',
             component: Registration
-        }*/],
+        }],
     history: createWebHistory()
 })
 createApp(App).use(createPinia()).use(router).mount('#app')
