@@ -1,27 +1,23 @@
 import {defineStore} from 'pinia'
 
-interface State {
-    user: UserInfo | null
-}
-
 export const useAuthStore = defineStore('auth', {
-    state: ():State => {
-       return {
-            user: null,
+    state: ()=> ({
+        user: {
+            name: String,
+            email: String,
+            password: String
+        }
        }
-    },
+    ),
     actions: {
         isLogin(){
             let logged = localStorage.getItem('user-info');
             return logged
         },
         login(name, email, password){
-
+            this.user.name = name
+            this.user.email = email
+            this.user.password = password
         }
     }
 })
-
-interface UserInfo {
-    name: string
-    email: string
-}

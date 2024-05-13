@@ -4,7 +4,7 @@
     <div>
         <label>Имя:</label>
         <div class="userData"> 
-            <p v-if="!edit">{{ name }}</p>
+            <p v-if="!edit">{{ authStore.user.name }}</p>
             <p v-else> <input v-on:keyup.enter="OnEnter" class="inline-input" type="text" v-model="name"> </p>
             <button class="imageButton" @click="OnChangeName()">
                 <img src="/pencil.svg" alt="pencil" class="pencil"/>
@@ -38,7 +38,7 @@ export default {
     },
     data(){
         return{
-            name: this.authStore.user.name,
+            name: '',
             passwordOld:'',
             passwordNew: '',
             passwordNew2: '',
@@ -53,7 +53,6 @@ export default {
             this.edit = false;
             if (this.name != this.authStore.user.name){
                 //отправить на бэк новое имя
-                //обновить стор
                 this.nameSuccess = true;
             }
             
