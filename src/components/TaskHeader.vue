@@ -1,9 +1,18 @@
-<script></script>
+<script>
+import {useTaskStore} from "../store/Task"
+
+export default{
+  setup(){
+    const taskStore = useTaskStore()
+    return {taskStore}
+  }
+}
+</script>
 
 <template>
-  <div class="row">
-    <div class="form-group col-md-3">
-      <label class="form-label" for="taskName">Task Name:</label
+  <div class="col">
+    <div class="form-group row-md-2">
+      <label class="form-label" for="taskName">Task name:</label
       ><input
         class="form-control border border-secondary"
         type="text"
@@ -12,10 +21,15 @@
         name="taskName"
         required=""
         data-secured="true"
-        value="Some name"
+        v-model="this.taskStore.name"
       />
     </div>
   </div>
+
 </template>
 
-<style></style>
+<style scoped>
+.col{
+  width: 400px;
+}
+</style>

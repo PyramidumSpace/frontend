@@ -10,6 +10,8 @@ import ResetPasswordSuccess from "./components/ResetPasswordSuccess.vue";
 import Registration from './components/Registration.vue'
 import Home from './components/Home.vue'
 import Task from './components/TaskBody.vue'
+import axios from 'axios'
+import VueAxios from 'vue-axios'
 
 const router = createRouter({
     routes: [{
@@ -45,4 +47,4 @@ const router = createRouter({
     ],
     history: createWebHistory()
 })
-createApp(App).use(createPinia()).use(router).mount('#app')
+createApp(App).use(createPinia()).use(router).use(VueAxios, axios).mount('#app')
