@@ -15,12 +15,19 @@
         <p className="error">{{ passwordError }}</p>
     
         <button @click="handleSubmit()">Отправить</button>
+        <p className="error">{{ regError }}</p>
     
     </form>
     </template>
     
     <script lang="ts">
+    import axios from 'axios'
+    import {useHostStore} from "../stores/Host";
     export default{
+        setup(){
+            const hostStore = useHostStore()
+            return { hostStore }
+        },
         data() {
             return {
                 name: '',
@@ -28,7 +35,8 @@
                 password: '',
                 emailError: '',
                 passwordError: '',
-                nameError: ''
+                nameError: '',
+                regError: ''
             }
         },
         methods: {
@@ -41,10 +49,24 @@
                 '' : 'Это поле не должно быть пустым';
                 return !this.passwordError && !this.emailError && !this.nameError
             },
-            sendToBackEnd(){},
+            async sendToBackEnd(){
+                const res = await axios.post(`http://${this.hostStore.ip}/api/auth/register`,{
+                    email : this.email,
+                    password : this.password
+                })
+
+                console.warn(res)
+                if (res.status == 200){
+
+                    this.$router.push({name: 'Home'})
+                } else {
+                    this.regError = 'Не удалось зарегистрировать'
+                }
+
+            },
             handleSubmit(){
                 if(this.isValid()){
-                    this.sendToBackend()
+                    this.sendToBackEnd()
                 }
             }
         }
