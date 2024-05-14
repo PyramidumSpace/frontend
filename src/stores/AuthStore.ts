@@ -4,19 +4,17 @@ export const useAuthStore = defineStore('auth', {
     state: ()=> ({
         user: {
             name: String,
-            email: String,
             password: String
         }
        }
     ),
     actions: {
         isLogin(){
-            let logged = localStorage.getItem('user-info');
-            return logged
+            
+            return this.user.name != null
         },
-        login(name, email, password){
+        login(name, password){
             this.user.name = name
-            this.user.email = email
             this.user.password = password
         }
     }
