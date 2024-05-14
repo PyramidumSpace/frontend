@@ -9,6 +9,7 @@ import ResetPassword from './components/ResetPassword.vue'
 import ResetPasswordSuccess from "./components/ResetPasswordSuccess.vue";
 import Registration from './components/Registration.vue'
 import Home from './components/Home.vue'
+import Task from './components/TaskBody.vue'
 
 const router = createRouter({
     routes: [{
@@ -35,7 +36,13 @@ const router = createRouter({
             path: '/home',
             name: 'Home',
             component: Home
-        }],
+        },
+        {
+            path: '/task',
+            name: 'Task',
+            component: Task
+        },
+    ],
     history: createWebHistory()
 })
 createApp(App).use(createPinia()).use(router).mount('#app')
