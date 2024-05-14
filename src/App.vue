@@ -1,16 +1,8 @@
 <script lang="ts">
-import TaskComponent from './components/TaskComponent.vue';
-
-export default{
-  components:{
-    TaskComponent
-  }
-}
 </script>
 
 <template>
   <router-view/>
-  <TaskComponent />
 </template>
 
 <style scoped>

@@ -95,7 +95,14 @@ Some text</textarea
           required=""
           name="dateDue"
           data-secured="true"
-          value="2024-03-06"
+        />
+      </div>
+      <div class="form-group col-md-3">
+        <label class="form-label" for="dateDue">Weight:</label
+        ><input
+          v-model="this.taskStore.weight"
+          class="form-control"
+          type="number"
         />
       </div>
     </div>
