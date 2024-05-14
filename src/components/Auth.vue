@@ -1,6 +1,3 @@
-<script setup lang="ts">
-    import {ref} from 'vue'
-</script>
 
 <template>
     <div>
@@ -21,6 +18,7 @@
                     <div id="passwordHelp" class="form-text button-bottom">{{password_msg}}</div>
                 </div>
                 <button @click="this.validation()" type="submit" class="btn btn-success">ВХОД</button>
+                <div id="validationError" class="form-text">{{error}}</div>
             </form>
         </div>
         <div>
@@ -31,26 +29,47 @@
 </template>
 
 <script lang="ts">
-    export default {
-        data() {
-            return {
-                username: ref(''),
-                password: ref(''),
-                username_msg: ref(''),
-                password_msg: ref('')
-            }
-        },
-        methods: {
-            validation() {
-                this.username_msg = this.username === '' ? 'Пожалуйста, введите логин' : '';
-                this.password_msg = this.password === '' ? 'Пожалуйста, введите пароль' : '';
+import axios from 'axios'
+import { useHostStore } from "../stores/Host";
+import { useAuthStore } from "../stores/AuthStore";
+export default {
+    setup() {
+        const authStore = useAuthStore()
+        const hostStore = useHostStore()
+        return { hostStore, authStore }
+    },
+    data() {
+        return {
+            username: '',
+            password: '',
+            username_msg: '',
+            password_msg: '',
+            error: ''
 
-                if (this.username !== '' && this.password !== '') {
-                    // Запрос к БД. Переход к пользовательскому окну
+        }
+    },
+    methods: {
+        async validation() {
+            this.username_msg = this.username === '' ? 'Пожалуйста, введите логин' : '';
+            this.password_msg = this.password === '' ? 'Пожалуйста, введите пароль' : '';
+
+            if (this.username !== '' && this.password !== '') {
+                const res = await axios.post(`http://${this.hostStore.ip}/api/auth/register`, {
+                    email: this.username,
+                    password: this.password
+                })
+                console.warn(res)
+                if (res.status == 200) {
+                    this.authStore.login(this.username, this.password)
+                    this.$router.push({ name: 'Home' })
+                }
+                else {
+                    this.error = "Не правильно введен логин или пароль"
                 }
             }
         }
     }
+}
 </script>
 
 <style>
