@@ -55,7 +55,9 @@
                     password : this.password
                 })
 
+                console.warn(res)
                 if (res.status == 200){
+
                     this.$router.push({name: 'Home'})
                 } else {
                     this.regError = 'Не удалось зарегистрировать'
@@ -64,7 +66,7 @@
             },
             handleSubmit(){
                 if(this.isValid()){
-                    this.sendToBackend()
+                    this.sendToBackEnd()
                 }
             }
         }
