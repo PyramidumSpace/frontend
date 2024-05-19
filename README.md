@@ -6,3 +6,5 @@
 ![Login](./docs/resources/login.png "Login")
 ## Register page
 ![Register](./docs/resources/register.png "Register")
+## Reset password page
+![Reset Password](./docs/resources/reset-pwd.png "Reset Password")

@@ -78,13 +78,13 @@
 
 <template>
   <div class="pyramidum-container">
-    <div class="pyramidum-register">
-      <div class="pyramidum-register-picture-wrapper">
-        <img src="/src/assets/img/pyramids.png" class="pyramidum-register-picture" alt="pyramidum">
+    <div class="pyramidum-auth">
+      <div class="pyramidum-auth-picture-wrapper">
+        <img src="/src/assets/img/pyramids.png" class="pyramidum-auth-picture" alt="pyramidum">
       </div>
-      <div class="pyramidum-register-form-wrapper">
-        <div class="pyramidum-register-form">
-          <div class="pyramidum-register-form-header mb-3">PYRAMIDUM</div>
+      <div class="pyramidum-auth-form-wrapper">
+        <div class="pyramidum-auth-form">
+          <div class="pyramidum-auth-form-header mb-3">PYRAMIDUM</div>
           <form @submit.prevent="" autocomplete=off>
             <div class="row">
               <div class="col-12">
@@ -106,6 +106,10 @@
                 <input class="form-control mb-3" type="password" placeholder="Повторите пароль" v-model="repeatPassword">
               </div>
             </div>
+            <p class="text-center">
+              <a @click="this.$router.push({name: 'Login'})" href="#" class="text-secondary">Войти</a> |
+              <a @click="this.$router.push({name: 'ResetPassword'})" href="#" class="text-secondary">Восстановить доступ</a>
+            </p>
             <div v-if="msg !== ''" class="font-pyramidum text-danger text-center mb-3">{{ msg }}</div>
             <div v-else class="d-none font-pyramidum text-danger text-center mb-3">{{ msg }}</div>
             <div class="d-flex justify-content-center mb-4">
@@ -120,95 +124,5 @@
     
 <style scoped>
 @import "/src/styles/style.css";
-
-.pyramidum-container {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.pyramidum-register {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: stretch;
-    flex-direction: column;
-}
-
-.pyramidum-register-picture-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: end;
-}
-
-.pyramidum-register-picture {
-    width: 60%;
-}
-
-.pyramidum-register-form-wrapper {
-    padding: 2rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.pyramidum-register-form-header {
-    font-family: var(--pyramidum-special-font-family), sans-serif;
-    font-size: 7vw;
-    font-weight: 900;
-    text-align: center;
-    background: var(--pyramidum-gradient);
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    color: var(--pyramidum-primary);
-}
-
-.pyramidum-register-form input {
-    font-size: 1.25rem;
-}
-
-@media (min-width: 576px) {
-    .pyramidum-register-form input {
-        font-size: 1.25rem;
-    }
-
-    .pyramidum-register {
-        width: 75%;
-    }
-
-    .pyramidum-register-form-header {
-        font-size: 5.6vw;
-    }
-}
-
-@media (min-width: 768px) {
-    .pyramidum-register-picture-wrapper {
-        justify-content: center;
-        align-items: center;
-    }
-
-    .pyramidum-register-form-header {
-        font-size: 4.2vw;
-    }
-}
-
-@media (min-width: 992px) {
-    .pyramidum-register-picture-wrapper {
-        padding: 0;
-    }
-  
-    .pyramidum-register-picture {
-        width: 75%;
-    }
-    
-    .pyramidum-register-form-wrapper {
-        padding: 0;
-    }
-}
-
-@media (min-width: 1200px) {
-
-}
+@import "/src/styles/auth.css";
 </style>

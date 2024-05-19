@@ -7,9 +7,7 @@ import Index from './components/Index.vue'
 import Login from './components/Login.vue'
 import Home from './components/Home.vue'
 import Register from './components/Register.vue'
-
-// import ResetPassword from './components/ResetPassword.vue'
-// import ResetPasswordSuccess from "./components/ResetPasswordSuccess.vue";
+import ResetPassword from './components/ResetPassword.vue'
 
 // import Task from './components/TaskComponent.vue'
 
@@ -34,6 +32,11 @@ const router = createRouter({
             path: '/home',
             name: 'Home',
             component: Home
+        },
+        {
+            path: '/reset-pwd',
+            name: 'ResetPassword',
+            component: ResetPassword
         },
     ],
     history: createWebHistory()
