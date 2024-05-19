@@ -6,7 +6,7 @@
   
   export default {
     setup(){
-      document.title = 'Регистрация'
+      document.title = 'Регистрация | Pyramidum'
       
       const hostStore = useHostStore()
       const authStore = useAuthStore()
@@ -70,7 +70,7 @@
       },
       
       mounted() {
-        document.title = 'Регистрация'
+        document.title = 'Регистрация | Pyramidum'
       }
     }
   }

@@ -6,7 +6,7 @@
   
   export default {
     setup() {
-      document.title = 'Авторизация'
+      document.title = 'Авторизация | Pyramidum'
       
       const authStore = useAuthStore()
       const hostStore = useHostStore()
@@ -62,7 +62,7 @@
     },
     
     mounted() {
-      document.title = 'Авторизация'
+      document.title = 'Авторизация | Pyramidum'
     }
   }
 </script>
