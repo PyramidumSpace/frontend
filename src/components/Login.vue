@@ -45,11 +45,13 @@
           const res = await axios.post(url, {
             email: this.username,
             password: this.password
-          })
+          }).catch(function (error) {})
           
           console.warn(res)
-      
-          if (res.status === 200) {
+          
+          // we catch error and then check response and status
+          // response must not be undefined
+          if (res && res.status === 200) {
             this.authStore.login(this.username, this.password)
             this.$router.push({ name: 'Home' })
           } else {
