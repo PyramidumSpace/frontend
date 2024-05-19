@@ -15,7 +15,7 @@
     
     data() {
       return {
-        username: '',
+        email: '',
         password: '',
         msg: ''
       }
@@ -23,8 +23,8 @@
     
     methods: {
       isValid() {
-        if (this.username === '') {
-          this.msg = 'Пожалуйста, введите логин'
+        if (this.email === '') {
+          this.msg = 'Пожалуйста, введите E-mail'
           return false
         }
         if (this.password === '') {
@@ -43,7 +43,7 @@
           let url = `${protocol}://${host}:${port}/api/auth/login`
           
           const res = await axios.post(url, {
-            email: this.username,
+            email: this.email,
             password: this.password
           }).catch(function (error) {})
           
@@ -52,7 +52,7 @@
           // we catch error and then check response and status
           // response must not be undefined
           if (res && res.status === 200) {
-            this.authStore.login(this.username, this.password)
+            this.authStore.login(this.email, this.password)
             this.$router.push({ name: 'Home' })
           } else {
             this.msg = 'Не правильно введен логин или пароль'
@@ -79,7 +79,7 @@
           <form @submit.prevent="" autocomplete=off>
             <div class="row">
               <div class="col-12">
-                <input class="form-control mb-3" type="email" placeholder="E-mail" v-model="username">
+                <input class="form-control mb-3" type="email" placeholder="E-mail" v-model="email">
               </div>
             </div>
             <div class="row">
