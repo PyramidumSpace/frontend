@@ -17,6 +17,10 @@ html, body, #app {
     align-items: stretch;
 }
 
+body.dashboard, #app.dashboard {
+    width: 100%;
+}
+
 .btn-pyramidum,
 .btn-pyramidum:hover,
 .btn-pyramidum:active,

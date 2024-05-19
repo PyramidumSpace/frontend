@@ -8,3 +8,5 @@
 ![Register](./docs/resources/register.png "Register")
 ## Reset password page
 ![Reset Password](./docs/resources/reset-pwd.png "Reset Password")
+## Dashboard: no tasks
+![No Tasks](./docs/resources/no-tasks.png "No Tasks")

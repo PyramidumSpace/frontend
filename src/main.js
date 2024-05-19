@@ -8,8 +8,7 @@ import Login from './pages/Login.vue'
 import Dashboard from './pages/Dashboard.vue'
 import Register from './pages/Register.vue'
 import ResetPassword from './pages/ResetPassword.vue'
-
-// import Task from './components/TaskComponent.vue'
+import CreateTask from './pages/CreateTask.vue'
 
 const router = createRouter({
     routes: [
@@ -38,6 +37,11 @@ const router = createRouter({
             name: 'ResetPassword',
             component: ResetPassword
         },
+        {
+            path: '/create-task',
+            name: 'CreateTask',
+            component: CreateTask
+        }
     ],
     history: createWebHistory()
 })
