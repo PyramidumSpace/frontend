@@ -1,5 +1,9 @@
 <script>
-  export default {}
+  export default {
+    setup() {
+      document.title = 'Pyramidum'
+    }
+  }
 </script>
 
 <template>

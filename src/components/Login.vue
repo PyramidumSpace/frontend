@@ -6,6 +6,8 @@
   
   export default {
     setup() {
+      document.title = 'Авторизация'
+      
       const authStore = useAuthStore()
       const hostStore = useHostStore()
       return {authStore, hostStore}

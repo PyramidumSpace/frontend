@@ -6,6 +6,8 @@
   
   export default {
     setup(){
+      document.title = 'Регистрация'
+      
       const hostStore = useHostStore()
       const authStore = useAuthStore()
       return { hostStore, authStore }
