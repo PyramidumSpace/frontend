@@ -1,5 +1,5 @@
 <script>
-import {useTaskStore} from "../store/Task"
+import {useTaskStore} from "../stores/Task.js"
 
 export default{
   setup(){

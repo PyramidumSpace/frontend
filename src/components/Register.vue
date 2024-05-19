@@ -22,7 +22,7 @@
     
     <script lang="ts">
     import axios from 'axios'
-    import {useHostStore} from "../stores/Host";
+    import {useHostStore} from "../stores/Host.js";
     export default{
         setup(){
             const hostStore = useHostStore()
