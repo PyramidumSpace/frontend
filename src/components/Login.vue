@@ -20,18 +20,21 @@
     },
     
     methods: {
-      validate(username, password) {
-        if (username === '')
-          return 'Пожалуйста, введите логин'
-        if (password === '')
-          return 'Пожалуйста, введите пароль'
-        return ''
+      isValid() {
+        if (this.username === '') {
+          this.msg = 'Пожалуйста, введите логин'
+          return false
+        }
+        if (this.password === '') {
+          this.msg = 'Пожалуйста, введите пароль'
+          return false
+        }
+        this.msg = ''
+        return true
       },
       
       async login() {
-        this.msg = this.validate(this.username, this.password)
-        
-        if (this.msg !== '') {
+        if (this.isValid()) {
           let protocol = this.hostStore.protocol
           let host = this.hostStore.host
           let port = this.hostStore.port
@@ -41,6 +44,8 @@
             email: this.username,
             password: this.password
           })
+          
+          console.warn(res)
       
           if (res.status === 200) {
             this.authStore.login(this.username, this.password)
@@ -80,7 +85,7 @@
             </div>
             <p class="text-secondary text-center">
               <a href="#" class="text-secondary">Восстановить доступ</a> |
-              <a href="#" class="text-secondary">Регистрация</a>
+              <a @click="this.$router.push({name: 'Register'})" href="#" class="text-secondary">Регистрация</a>
             </p>
             <div v-if="msg !== ''" class="font-pyramidum text-danger text-center mb-3">{{ msg }}</div>
             <div v-else class="d-none font-pyramidum text-danger text-center mb-3">{{ msg }}</div>
@@ -97,12 +102,6 @@
 
 <style scoped>
 @import "/src/styles/style.css";
-
-html, body, #app {
-    display: flex;
-    justify-content: center;
-    align-items: stretch;
-}
 
 .pyramidum-container {
     width: 100%;

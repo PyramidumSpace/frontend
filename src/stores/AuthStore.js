@@ -10,7 +10,6 @@ export const useAuthStore = defineStore('auth', {
     ),
     actions: {
         isLogin(){
-            
             return this.user.name != null
         },
         login(name, password){

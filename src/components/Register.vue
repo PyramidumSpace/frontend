@@ -1,140 +1,210 @@
-<template>
-    <form @submit.prevent="">
-        <h3>Регистрация</h3>
+<script>
+  import axios from 'axios'
+  
+  import {useHostStore} from '../stores/Host.js';
+  import {useAuthStore} from '../stores/AuthStore.js';
+  
+  export default {
+    setup(){
+      const hostStore = useHostStore()
+      const authStore = useAuthStore()
+      return { hostStore, authStore }
+    },
     
-        <label>Имя:</label>
-        <input type="text" v-model="name" placeholder="Введите Ваше имя">
-        <div className="error">{{ nameError }}</div>
-    
-        <label>Почта:</label>
-        <input type="email" v-model="email" placeholder="Введите Вашу почту">
-        <p className="error">{{ emailError }}</p>
-    
-        <label>Пароль:</label>
-        <input type="password" v-model="password" placeholder="Придумайте пароль">
-        <p className="error">{{ passwordError }}</p>
-    
-        <button @click="handleSubmit()">Отправить</button>
-        <p className="error">{{ regError }}</p>
-    
-    </form>
-    </template>
-    
-    <script lang="ts">
-    import axios from 'axios'
-    import {useHostStore} from "../stores/Host.js";
-    export default{
-        setup(){
-            const hostStore = useHostStore()
-            return { hostStore }
-        },
-        data() {
-            return {
-                name: '',
-                email: '',
-                password: '',
-                emailError: '',
-                passwordError: '',
-                nameError: '',
-                regError: ''
-            }
-        },
-        methods: {
-            isValid(){
-                this.emailError = this.email.length > 0 ? 
-                '' : 'Это поле не должно быть пустым';
-                this.passwordError = this.password.length > 0 ?
-                '' : 'Это поле не должно быть пустым';
-                this.nameError = this.name.length > 0 ?
-                '' : 'Это поле не должно быть пустым';
-                return !this.passwordError && !this.emailError && !this.nameError
-            },
-            async sendToBackEnd(){
-                const res = await axios.post(`http://${this.hostStore.ip}/api/auth/register`,{
-                    email : this.email,
-                    password : this.password
-                })
-
-                console.warn(res)
-                if (res.status == 200){
-
-                    this.$router.push({name: 'Home'})
-                } else {
-                    this.regError = 'Не удалось зарегистрировать'
-                }
-
-            },
-            handleSubmit(){
-                if(this.isValid()){
-                    this.sendToBackEnd()
-                }
-            }
+    data() {
+      return {
+        name: '',
+        email: '',
+        password: '',
+        repeatPassword: '',
+        msg: ''
+      }
+    },
+    methods: {
+      isValid() {
+        if (this.name === '') {
+          this.msg = 'Пожалуйста, введите имя пользователя'
+          return false
         }
+        if (this.email === '') {
+          this.msg = 'Пожалуйста, введите E-mail'
+          return false
+        }
+        if (this.password === '') {
+          this.msg = 'Пожалуйста, введите пароль'
+          return false
+        }
+        if (this.repeatPassword !== this.password) {
+          this.msg = 'Пароли не совпадают'
+          return false
+        }
+        this.msg = ''
+        return true
+      },
+      
+      async register() {
+        if (this.isValid()) {
+          let protocol = this.hostStore.protocol
+          let host = this.hostStore.host
+          let port = this.hostStore.port
+          let url = `${protocol}://${host}:${port}/api/auth/register`
+          
+          const res = await axios.post(url, {
+            email: this.username,
+            password: this.password
+          })
+          
+          console.warn(res)
+          
+          if (res.status === 200) {
+            this.authStore.login(this.email, this.password)
+            this.$router.push({name: 'Home'})
+          } else {
+            this.msg = 'Не удалось зарегистрировать'
+          }
+        }
+      },
+      
+      mounted() {
+        document.title = 'Регистрация'
+      }
     }
-    </script>
+  }
+</script>
+
+<template>
+  <div class="pyramidum-container">
+    <div class="pyramidum-register">
+      <div class="pyramidum-register-picture-wrapper">
+        <img src="/src/assets/img/pyramids.png" class="pyramidum-register-picture" alt="pyramidum">
+      </div>
+      <div class="pyramidum-register-form-wrapper">
+        <div class="pyramidum-register-form">
+          <div class="pyramidum-register-form-header mb-3">PYRAMIDUM</div>
+          <form @submit.prevent="" autocomplete=off>
+            <div class="row">
+              <div class="col-12">
+                <input class="form-control mb-3" type="text" placeholder="Имя" v-model="name">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12">
+                <input class="form-control mb-3" type="email" placeholder="E-mail" v-model="email">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12">
+                <input class="form-control mb-3" type="password" placeholder="Пароль" v-model="password">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12">
+                <input class="form-control mb-3" type="password" placeholder="Повторите пароль" v-model="repeatPassword">
+              </div>
+            </div>
+            <div v-if="msg !== ''" class="font-pyramidum text-danger text-center mb-3">{{ msg }}</div>
+            <div v-else class="d-none font-pyramidum text-danger text-center mb-3">{{ msg }}</div>
+            <div class="d-flex justify-content-center mb-4">
+              <input @click="this.register()" type="submit" class="btn btn-pyramidum rounded-pill fw-bold px-3" id="btn-register" value="Вперёд!">
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
     
-    <style scoped>
-    form {
-        max-width: 600px;
-        margin: 30px auto;
-        background: #fff;
-        text-align: left;
-        padding: 20px;
-        border-radius: 10px;
+<style scoped>
+@import "/src/styles/style.css";
+
+.pyramidum-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pyramidum-register {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    flex-direction: column;
+}
+
+.pyramidum-register-picture-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: end;
+}
+
+.pyramidum-register-picture {
+    width: 60%;
+}
+
+.pyramidum-register-form-wrapper {
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pyramidum-register-form-header {
+    font-family: var(--pyramidum-special-font-family), sans-serif;
+    font-size: 7vw;
+    font-weight: 900;
+    text-align: center;
+    background: var(--pyramidum-gradient);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: var(--pyramidum-primary);
+}
+
+.pyramidum-register-form input {
+    font-size: 1.25rem;
+}
+
+@media (min-width: 576px) {
+    .pyramidum-register-form input {
+        font-size: 1.25rem;
+    }
+
+    .pyramidum-register {
+        width: 75%;
+    }
+
+    .pyramidum-register-form-header {
+        font-size: 5.6vw;
+    }
+}
+
+@media (min-width: 768px) {
+    .pyramidum-register-picture-wrapper {
+        justify-content: center;
+        align-items: center;
+    }
+
+    .pyramidum-register-form-header {
+        font-size: 4.2vw;
+    }
+}
+
+@media (min-width: 992px) {
+    .pyramidum-register-picture-wrapper {
+        padding: 0;
+    }
+  
+    .pyramidum-register-picture {
+        width: 75%;
     }
     
-    h3 {
-        color: #1a1818;
-        font-size: 30px;
+    .pyramidum-register-form-wrapper {
+        padding: 0;
     }
-    
-    label {
-        color: #aaa;
-        display:inline-block;
-        margin: 25px 0 10px;
-        font-size: 12px;
-        text-transform: uppercase;
-    }
-    
-    input, select {
-        display: block;
-        padding: 10px 6px;
-        width: 250px;
-        box-sizing: bordre-box;
-        border: none;
-        border-bottom: 1px solid #ddd;
-        color: #555;
-    }
-    
-    .pill {
-        display: inline-block;
-        margin: 20px 10px 0 0 ;
-        padding: 6px 12px;
-        border-radius: 20px;
-        font-size: 12px;
-        cursor: pointer;
-        background: #eee;
-    }
-    
-    button {
-        background: #1a1818;
-        border: 0;
-        margin-top: 50px;
-        padding: 10px 20px;
-        color: white;
-        border-radius: 20px;
-    }
-    
-    .submit {
-        text-align: center;
-    }
-    
-    .error {
-        color: #ff0000;
-        margin-top: 0px;
-        margin-bottom: 0px;
-        height: 10px;
-        font-size: 0.8em;
-        font-weight: bold;
-    }
-    </style>
+}
+
+@media (min-width: 1200px) {
+
+}
+</style>
