@@ -2,7 +2,7 @@
   import axios from 'axios'
   
   import { useHostStore } from '../stores/Host.js';
-  import { useAuthStore } from '../stores/AuthStore.js';
+  import { useAuthStore } from '../stores/Auth.js';
   
   export default {
     setup() {

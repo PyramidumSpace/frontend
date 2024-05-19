@@ -1,27 +1,26 @@
 <script>
-import {useTaskStore} from "../stores/Task.js"
+  import {useTaskStore} from "../stores/Task.js"
 
-export default{
-  setup(){
-    const taskStore = useTaskStore()
-    return {taskStore}
+  export default{
+    setup(){
+      const taskStore = useTaskStore()
+      return {taskStore}
+    }
   }
-}
 </script>
 
 <template>
-  <div class="col">
-    <div class="form-group row-md-2">
-      <label class="form-label" for="taskName">Task name:</label
-      ><input
-        class="form-control border border-secondary"
-        type="text"
-        id="taskName"
-        placeholder="Enter Task Name..."
-        name="taskName"
-        required=""
-        data-secured="true"
-        v-model="this.taskStore.name"
+  <div class="row">
+    <div class="form-group">
+      <label class="form-label" for="taskName">Task name:</label>
+      <input
+          v-model="this.taskStore.name"
+          class="form-control border border-secondary"
+          type="text"
+          id="taskName"
+          placeholder="Enter Task Name..."
+          name="taskName"
+          required
       />
     </div>
   </div>
@@ -29,7 +28,4 @@ export default{
 </template>
 
 <style scoped>
-.col{
-  width: 400px;
-}
 </style>

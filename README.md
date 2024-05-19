@@ -10,3 +10,5 @@
 ![Reset Password](./docs/resources/reset-pwd.png "Reset Password")
 ## Dashboard: no tasks
 ![No Tasks](./docs/resources/no-tasks.png "No Tasks")
+## Create Task page
+![Create Task](./docs/resources/create-task.png "Create Task")
