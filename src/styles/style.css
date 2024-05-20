@@ -35,6 +35,10 @@ body.dashboard, #app.dashboard {
     font-family: var(--pyramidum-base-font-family), sans-serif;
 }
 
+.pyramidum-link {
+    cursor: pointer;
+}
+
 @media (min-width: 576px) {
     :root {
     }

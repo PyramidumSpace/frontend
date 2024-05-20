@@ -107,8 +107,8 @@
               </div>
             </div>
             <p class="text-center">
-              <a @click="this.$router.push({name: 'Login'})" class="text-secondary">Войти</a> |
-              <a @click="this.$router.push({name: 'ResetPassword'})" class="text-secondary">Восстановить доступ</a>
+              <a @click="this.$router.push({name: 'Login'})" class="pyramidum-link text-secondary">Войти</a> |
+              <a @click="this.$router.push({name: 'ResetPassword'})" class="pyramidum-link text-secondary">Восстановить доступ</a>
             </p>
             <div v-if="msg !== ''" class="font-pyramidum text-danger text-center mb-3">{{ msg }}</div>
             <div v-else class="d-none font-pyramidum text-danger text-center mb-3">{{ msg }}</div>
