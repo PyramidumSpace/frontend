@@ -47,10 +47,6 @@
 }
 
 @media (min-width: 576px) {
-    .pyramidum-auth-form input {
-        font-size: 1.25rem;
-    }
-
     .pyramidum-auth {
         width: 75%;
     }
@@ -72,10 +68,6 @@
 }
 
 @media (min-width: 992px) {
-    .pyramidum-auth-picture-wrapper {
-        padding: 0;
-    }
-
     .pyramidum-auth-picture {
         width: 75%;
     }
