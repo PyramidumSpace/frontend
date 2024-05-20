@@ -58,11 +58,11 @@
           <CreateTaskForm />
         </div>
       </div>
-      <div class="pyramidum-dashboard-footer flex-wrap justify-content-center justify-content-sm-between mb-4">
-        <a @click="this.createTask()" class="btn btn-pyramidum rounded-pill fw-bold px-3 my-1 my-sm-3 mx-2" href="#">
+      <div class="d-flex align-center flex-wrap justify-content-center justify-content-sm-between mb-4">
+        <a @click="this.createTask()" class="btn btn-pyramidum rounded-pill fw-bold px-3 my-1 my-sm-3 mx-2">
           Создать задачу
         </a>
-        <a @click="this.$router.push({name: 'Dashboard'})" class="btn btn-secondary btn-cancel rounded-pill fw-bold px-3 my-1 my-sm-3 mx-2" href="#">
+        <a @click="this.$router.push({name: 'Dashboard'})" class="btn btn-secondary rounded-pill fw-bold px-3 my-1 my-sm-3 mx-2">
           Отмена
         </a>
       </div>
@@ -73,8 +73,4 @@
 <style scoped>
 @import "/src/styles/style.css";
 @import "/src/styles/dashboard.css";
-
-.btn-cancel {
-    font-family: var(--pyramidum-base-font-family), sans-serif;
-}
 </style>

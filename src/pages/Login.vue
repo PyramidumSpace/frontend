@@ -88,8 +88,8 @@
               </div>
             </div>
             <p class="text-secondary text-center">
-              <a @click="this.$router.push({name: 'ResetPassword'})" href="#" class="text-secondary">Восстановить доступ</a> |
-              <a @click="this.$router.push({name: 'Register'})" href="#" class="text-secondary">Регистрация</a>
+              <a @click="this.$router.push({name: 'ResetPassword'})" class="text-secondary">Восстановить доступ</a> |
+              <a @click="this.$router.push({name: 'Register'})" class="text-secondary">Регистрация</a>
             </p>
             <div v-if="msg !== ''" class="font-pyramidum text-danger text-center mb-3">{{ msg }}</div>
             <div v-else class="d-none font-pyramidum text-danger text-center mb-3">{{ msg }}</div>

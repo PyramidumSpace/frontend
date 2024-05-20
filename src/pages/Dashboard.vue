@@ -83,6 +83,16 @@
     },
     
     methods: {
+      noTasks() {
+        if (this.tasks === undefined)
+          return true
+        if (this.tasks === null)
+          return true
+        if (this.tasks.length === 0)
+          return true
+        return false
+      },
+      
       mounted() {
         document.title = 'Dashboard | Pyramidum'
       }
@@ -101,14 +111,8 @@
         </div>
         <div class="pyramidum-dashboard-nav my-2"></div>
       </div>
-      <div v-if="this.tasks" class="pyramidum-dashboard-footer justify-content-center mb-2">
-        <a @click="this.$router.push({name: 'CreateTask'})" class="btn btn-pyramidum rounded-pill fw-bold px-3" href="#">
-          + Создать задачу
-        </a>
-      </div>
-      <div v-else></div>
       <div class="pyramidum-dashboard-content flex-grow-1">
-        <div v-if="!this.tasks" class="pyramidum-dashboard-tasks">
+        <div v-if="noTasks()" class="pyramidum-dashboard-tasks">
           <div  class="pyramidum-dashboard-no-tasks">
             У Вас нет задач
           </div>
@@ -150,12 +154,11 @@
           </div>
         </div>
       </div>
-      <div v-if="!this.tasks" class="pyramidum-dashboard-footer justify-content-center mb-4">
-        <a @click="this.$router.push({name: 'CreateTask'})" class="btn btn-pyramidum rounded-pill fw-bold px-3 my-3" href="#">
+      <div class="pyramidum-dashboard-footer justify-content-center">
+        <a @click="this.$router.push({name: 'CreateTask'})" class="btn btn-pyramidum rounded-pill fw-bold px-3">
           + Создать задачу
         </a>
       </div>
-      <div v-else></div>
     </div>
   </div>
 </template>
@@ -172,7 +175,6 @@
     justify-content: center;
     align-items: center;
     padding: 1.5rem;
-    margin: 1.5rem;
 }
 
 .pyramidum-dashboard-tasks-list {
@@ -220,6 +222,18 @@
     -webkit-text-fill-color: transparent;
     color: var(--pyramidum-tertiary);
     word-spacing: 0.5rem;
+}
+
+.pyramidum-dashboard-footer {
+    display: flex;
+    align-items: center;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding-bottom: .5rem;
+    padding-top: .5rem;
 }
 
 @media (min-width: 768px) {

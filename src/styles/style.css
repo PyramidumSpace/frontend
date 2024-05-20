@@ -31,6 +31,10 @@ body.dashboard, #app.dashboard {
     outline: none;
 }
 
+.btn {
+    font-family: var(--pyramidum-base-font-family), sans-serif;
+}
+
 @media (min-width: 576px) {
     :root {
     }

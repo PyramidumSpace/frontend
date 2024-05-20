@@ -3,6 +3,7 @@
     display: flex;
     justify-content: center;
     align-items: stretch;
+    padding: .5rem;
 }
 
 .pyramidum-dashboard {
@@ -46,12 +47,8 @@
 .pyramidum-dashboard-content {
     display: flex;
     flex-wrap: wrap;
-    justify-content: stretch;
-}
-
-.pyramidum-dashboard-footer {
-    display: flex;
-    align-items: center;
+    flex-direction: column;
+    align-items: stretch;
 }
 
 @media (min-width: 576px) {
