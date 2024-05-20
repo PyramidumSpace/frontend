@@ -185,6 +185,10 @@
     padding: 0;
 }
 
+.pyramidum-dashboard-tasks-list:last-child {
+    margin-bottom: 5rem;
+}
+
 .pyramidum-dashboard-task {
     border: 1px solid var(--pyramidum-light-grey);
     border-radius: 1rem;
