@@ -2,6 +2,10 @@
   export default {
     setup() {
       document.title = 'Pyramidum'
+    },
+    
+    mounted() {
+      document.title = 'Pyramidum'
     }
   }
 </script>
