@@ -1,16 +1,15 @@
 <script>
   import axios from 'axios'
   
-  import {useHostStore} from '../stores/Host.js';
+  import {projectConfig} from '../common/index.js';
   import {useAuthStore} from '../stores/Auth.js';
   
   export default {
     setup(){
       document.title = 'Регистрация | Pyramidum'
       
-      const hostStore = useHostStore()
       const authStore = useAuthStore()
-      return { hostStore, authStore }
+      return { authStore }
     },
     
     data() {
@@ -46,9 +45,9 @@
       
       async register() {
         if (this.isValid()) {
-          let protocol = this.hostStore.protocol
-          let host = this.hostStore.host
-          let port = this.hostStore.port
+          let protocol = projectConfig.protocol
+          let host = projectConfig.host
+          let port = projectConfig.port
           let url = `${protocol}://${host}:${port}/api/auth/register`
           
           const res = await axios.post(url, {
@@ -56,7 +55,7 @@
             password: this.password
           }).catch(function (error) {})
           
-          console.warn(res)
+          console.debug(res)
           
           // we catch error and then check response and status
           // response must not be undefined
