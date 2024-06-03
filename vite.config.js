@@ -8,7 +8,7 @@ export default defineConfig(({ command, mode }) => {
     plugins: [vue()],
     server: {
       host: env.VITE_HOST,
-      strictPort: env.VITE_PORT
+      port: env.VITE_PORT
     }
   }
 })
