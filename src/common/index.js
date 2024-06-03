@@ -1,5 +1,5 @@
 export const projectConfig = {
-    protocol: 'http',
-    host: 'localhost',
-    port: '6969'
+    protocol: import.meta.env.VITE_API_PROTOCOL,
+    host: import.meta.env.VITE_API_HOST,
+    port: import.meta.env.VITE_API_PORT
 }
