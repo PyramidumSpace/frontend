@@ -39,7 +39,7 @@
           let protocol = projectConfig.protocol
           let host = projectConfig.host
           let port = projectConfig.port
-          let url = `${protocol}://${host}:${port}/api/auth/login`
+          let url = `${protocol}://${host}/api/auth/login`
           
           const res = await axios.post(url, {
             email: this.email,
@@ -51,8 +51,8 @@
           // we catch error and then check response and status
           // response must not be undefined
           if (res && res.status === 200) {
-            this.authStore.login(this.email, this.password)
-            this.$router.push({ name: 'Home' })
+            this.authStore.login(res.data.user_id, this.email, this.password)
+            this.$router.push({ name: 'Dashboard' })
           } else {
             this.msg = 'Не правильно введен логин или пароль'
           }

@@ -1,4 +1,8 @@
 <script>
+  import axios from 'axios'
+  import { projectConfig } from '../common/index.js';
+  import { useAuthStore } from '../stores/Auth.js';
+
   export default {
     // hack for component-dependent html tag 'body' styling
     beforeCreate: function() {
@@ -8,77 +12,81 @@
     
     setup() {
       document.title = 'Dashboard | Pyramidum'
+
+      const authStore = useAuthStore()
+      return {authStore}
     },
     
     data() {
       return {
-        tasks: [
-          {
-            name: "Подготовка к К/р по ОТУ",
-            description: "Прорешать на медии задания прошлых лет, спросить у Георгия конспект",
-            external_images: [],
-            priorityLevel: true,
-            urgency: true,
-            deadline: "20.05.2024",
-            taskStatus: 1,
-            owner_id: 0,
-            parent_id: "",
-            possible_deadline: "",
-            weight: 4
-          },
-          {
-            name: "Сделать дз по теоркоду",
-            description: "Задания 24.5, 24.15, 25.2",
-            external_images: [],
-            priorityLevel: true,
-            urgency: true,
-            deadline: "20.05.2024",
-            taskStatus: 2,
-            owner_id: 0,
-            parent_id: "",
-            possible_deadline: "",
-            weight: 8
-          },
-          {
-            name: "Сделать таску по УППРПО",
-            description: "Реализовать CI/CD сервиса для гражданина стейтходера",
-            external_images: [],
-            priorityLevel: true,
-            urgency: false,
-            deadline: "21.05.2024",
-            taskStatus: 0,
-            owner_id: 0,
-            parent_id: "",
-            possible_deadline: "",
-            weight: 8
-          },
-          {
-            name: "Проект по ТООИ",
-            description: "Написать распознаватель капч на питоне (мэйби использовать нейросетку)",
-            external_images: [],
-            priorityLevel: false,
-            urgency: false,
-            deadline: "21.05.2024",
-            taskStatus: 2,
-            owner_id: 0,
-            parent_id: "",
-            possible_deadline: "",
-            weight: 12
-          },
-          {
-            name: "СР по праву",
-            description: "Написать анализ гражданского иска по договору на оказание услуг по разработке ПО с приложением договора и иска",
-            external_images: [],
-            priorityLevel: true,
-            urgency: true,
-            deadline: "24.05.2024",
-            taskStatus: 2,
-            owner_id: 0,
-            parent_id: "",
-            possible_deadline: "",
-            weight: 4
-          },
-        ]
+        tasks: []
+        // tasks: [
+        //   {
+        //     name: "Подготовка к К/р по ОТУ",
+        //     description: "Прорешать на медии задания прошлых лет, спросить у Георгия конспект",
+        //     external_images: [],
+        //     priorityLevel: true,
+        //     urgency: true,
+        //     deadline: "20.05.2024",
+        //     taskStatus: 1,
+        //     owner_id: 0,
+        //     parent_id: "",
+        //     possible_deadline: "",
+        //     weight: 4
+        //   },
+        //   {
+        //     name: "Сделать дз по теоркоду",
+        //     description: "Задания 24.5, 24.15, 25.2",
+        //     external_images: [],
+        //     priorityLevel: true,
+        //     urgency: true,
+        //     deadline: "20.05.2024",
+        //     taskStatus: 2,
+        //     owner_id: 0,
+        //     parent_id: "",
+        //     possible_deadline: "",
+        //     weight: 8
+        //   },
+        //   {
+        //     name: "Сделать таску по УППРПО",
+        //     description: "Реализовать CI/CD сервиса для гражданина стейтходера",
+        //     external_images: [],
+        //     priorityLevel: true,
+        //     urgency: false,
+        //     deadline: "21.05.2024",
+        //     taskStatus: 0,
+        //     owner_id: 0,
+        //     parent_id: "",
+        //     possible_deadline: "",
+        //     weight: 8
+        //   },
+        //   {
+        //     name: "Проект по ТООИ",
+        //     description: "Написать распознаватель капч на питоне (мэйби использовать нейросетку)",
+        //     external_images: [],
+        //     priorityLevel: false,
+        //     urgency: false,
+        //     deadline: "21.05.2024",
+        //     taskStatus: 2,
+        //     owner_id: 0,
+        //     parent_id: "",
+        //     possible_deadline: "",
+        //     weight: 12
+        //   },
+        //   {
+        //     name: "СР по праву",
+        //     description: "Написать анализ гражданского иска по договору на оказание услуг по разработке ПО с приложением договора и иска",
+        //     external_images: [],
+        //     priorityLevel: true,
+        //     urgency: true,
+        //     deadline: "24.05.2024",
+        //     taskStatus: 2,
+        //     owner_id: 0,
+        //     parent_id: "",
+        //     possible_deadline: "",
+        //     weight: 4
+        //   },
+        // ]
       }
     },
     
@@ -92,11 +100,26 @@
           return true
         return false
       },
-      
-      mounted() {
-        document.title = 'Dashboard | Pyramidum'
+
+      async loadData(){
+        let protocol = projectConfig.protocol
+        let host = projectConfig.host
+        let port = projectConfig.port
+        let url = `${protocol}://${host}/api/tasks?user_id=${this.authStore.user.id}`
+
+        let result = await axios.get(url);
+        console.warn(result)
+        this.tasks=result.data.tasks;
       }
-    }
+      
+
+    },
+
+    async mounted() {
+        document.title = 'Dashboard | Pyramidum';
+        this.loadData()
+      }
+
   }
 </script>
 
@@ -120,21 +143,21 @@
         <div v-else class="pyramidum-dashboard-tasks-list">
           <div class="pyramidum-dashboard-task" v-for="task in this.tasks">
             <div class="pyramidum-dashboard-task-header">
-              {{ task.name }}
+              {{ task.header }}
             </div>
             <div class="pyramidum-dashboard-task-content">
               <div class="pyramidum-dashboard-task-main">
                 <div class="pyramidum-dashboard-task-description">
-                  {{ task.description }}
+                  {{ task.text }}
                 </div>
               </div>
               <div class="pyramidum-dashboard-task-attributes">
                 <div class="pyramidum-dashboard-task-prioriy">
-                  <div v-if="task.priorityLevel" class="badge text-bg-danger">High</div>
+                  <div v-if="task.is_important" class="badge text-bg-danger">High</div>
                   <div v-else class="badge text-bg-success">Low</div>
                 </div>
                 <div class="pyramidum-dashboard-task-urgency">
-                  <div v-if="task.urgency" class="badge text-bg-danger">Urgent</div>
+                  <div v-if="task.is_urgent" class="badge text-bg-danger">Urgent</div>
                   <div v-else class="badge text-bg-success">Non urgent</div>
                 </div>
                 <div class="pyramidum-dashboard-task-deadline">
@@ -144,9 +167,9 @@
                   <div class="badge text-bg-warning">{{ task.weight }}</div>
                 </div>
                 <div class="pyramidum-dashboard-task-status">
-                  <div v-if="task.taskStatus === 0" class="badge text-bg-secondary">Not started</div>
-                  <div v-else-if="task.taskStatus === 1" class="badge text-bg-warning">In Progress</div>
-                  <div v-else-if="task.taskStatus === 2" class="badge text-bg-success">Done</div>
+                  <div v-if="task.progress_status === 0" class="badge text-bg-secondary">Not started</div>
+                  <div v-else-if="task.progress_status === 1" class="badge text-bg-warning">In Progress</div>
+                  <div v-else-if="task.progress_status === 2" class="badge text-bg-success">Done</div>
                   <div v-else class="badge text-bg-danger">Unknown</div>
                 </div>
               </div>

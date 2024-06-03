@@ -48,20 +48,20 @@
           let protocol = projectConfig.protocol
           let host = projectConfig.host
           let port = projectConfig.port
-          let url = `${protocol}://${host}:${port}/api/auth/register`
+          let url = `${protocol}://${host}/api/auth/register`
           
           const res = await axios.post(url, {
             email: this.email,
             password: this.password
           }).catch(function (error) {})
           
-          console.debug(res)
+          console.warn(res)
           
           // we catch error and then check response and status
           // response must not be undefined
           if (res && res.status === 200) {
-            this.authStore.login(this.email, this.password)
-            this.$router.push({name: 'Home'})
+            this.authStore.login(res.data.user_id, this.email, this.password)
+            this.$router.push({name: 'Dashboard'})
           } else {
             this.msg = 'Не удалось зарегистрироваться'
           }
