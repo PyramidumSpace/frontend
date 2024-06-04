@@ -2,7 +2,14 @@
   import { useMotivatorStore } from "../stores/Motivator.js";
   
   export default {
+    beforeCreate: function() {
+        document.body.className = 'dashboard'
+        document.getElementById('app').className = 'dashboard'
+    },
+    
     setup() {
+      document.title = 'PIRAMIDA | Pyramidum'
+      
       const motivatorStore = useMotivatorStore()
       return { motivatorStore }
     },
@@ -69,7 +76,6 @@
 }
 
 .pyramidum-motivator {
-    height: 80%;
     display: flex;
     flex-direction: column;
     justify-content: center;
