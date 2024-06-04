@@ -178,8 +178,11 @@
         </div>
       </div>
       <div class="pyramidum-dashboard-footer justify-content-center">
-        <a @click="this.$router.push({name: 'CreateTask'})" class="btn btn-pyramidum rounded-pill fw-bold px-3">
+        <a @click="this.$router.push({name: 'CreateTask'})" class="btn btn-pyramidum rounded-pill fw-bold px-3 mx-2">
           + Создать задачу
+        </a>
+        <a @click="this.$router.push({name: 'Motivator'})" class="btn btn-pyramidum rounded-pill fw-bold px-3 mx-2">
+          PIRAMIDA
         </a>
       </div>
     </div>

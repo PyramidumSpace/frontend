@@ -9,6 +9,7 @@ import Dashboard from './pages/Dashboard.vue'
 import Register from './pages/Register.vue'
 import ResetPassword from './pages/ResetPassword.vue'
 import CreateTask from './pages/CreateTask.vue'
+import Motivator from "./pages/Motivator.vue";
 
 const router = createRouter({
     routes: [
@@ -41,7 +42,12 @@ const router = createRouter({
             path: '/create-task',
             name: 'CreateTask',
             component: CreateTask
-        }
+        },
+        {
+            path: '/motivator',
+            name: 'Motivator',
+            component: Motivator
+        },
     ],
     history: createWebHistory()
 })
