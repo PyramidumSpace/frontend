@@ -38,8 +38,17 @@
           let url = `${protocol}://${host}:${port}/api/tasks`
           
           const res = await axios.post(url, {
-            email: this.email,
-            password: this.password
+            header: this.taskStore.name,
+            text: this.taskStore.text,
+            external_images: [],
+            deadline: this.taskStore.deadline,
+            progress_status: this.taskStore.progressStatus,
+            is_important: this.taskStore.isImportant,
+            is_urgent: this.taskStore.isUrgent,
+            owner_id: this.taskStore.ownerId,
+            parent_id: null,
+            possible_deadline: this.taskStore.possibleDeadline,
+            weight: this.taskStore.weight
           }).catch(function (error) {})
           
           console.debug(res)
@@ -47,8 +56,8 @@
           // we catch error and then check response and status
           // response must not be undefined
           if (res && res.status === 200) {
-            this.authStore.login(res.data.user_id, this.email, this.password)
             this.$router.push({ name: 'Dashboard' })
+          }
         }
       },
       

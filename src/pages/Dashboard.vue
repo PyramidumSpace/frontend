@@ -117,7 +117,7 @@
 
     async mounted() {
         document.title = 'Dashboard | Pyramidum';
-        this.loadData()
+        await this.loadData()
       }
 
   }

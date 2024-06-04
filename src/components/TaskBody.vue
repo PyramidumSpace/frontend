@@ -34,7 +34,7 @@
     <div class="form-group">
       <label class="form-label" for="taskDescription">Task Description:</label>
       <textarea
-          v-model="this.taskStore.description"
+          v-model="this.taskStore.text"
           class="form-control border border-secondary"
           name="taskDescription"
           id="taskDescription"
@@ -48,7 +48,7 @@
     <div class="form-group col-12 col-sm-6 col-md-4 col-lg-3">
       <label class="form-label" for="priority">Priority Level:</label>
       <select
-          v-model="this.taskStore.priorityLevel"
+          v-model="this.taskStore.isImportant"
           class="form-select mb-2 priority"
           name="priority"
           required
@@ -63,7 +63,7 @@
     <div class="form-group col-12 col-sm-6 col-md-4 col-lg-3">
       <label class="form-label" for="urgency">Urgency:</label>
       <select
-          v-model="this.taskStore.urgency"
+          v-model="this.taskStore.isUrgent"
           class="form-select mb-2"
           name="urgency"
           required
@@ -101,7 +101,7 @@
     <div class="form-group">
       <label class="form-label" for="status">Task Status:</label>
       <select
-          v-model="this.taskStore.taskStatus"
+          v-model="this.taskStore.progressStatus"
           class="form-select mb-2 status"
           name="status"
           required

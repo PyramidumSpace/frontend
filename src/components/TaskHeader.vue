@@ -14,7 +14,7 @@
     <div class="form-group">
       <label class="form-label" for="taskName">Task name:</label>
       <input
-          v-model="this.taskStore.name"
+          v-model="this.taskStore.header"
           class="form-control border border-secondary"
           type="text"
           id="taskName"
