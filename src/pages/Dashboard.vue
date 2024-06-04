@@ -105,7 +105,7 @@
         let protocol = projectConfig.protocol
         let host = projectConfig.host
         let port = projectConfig.port
-        let url = `${protocol}://${host}/api/tasks?user_id=${this.authStore.user.id}`
+        let url = `${protocol}://${host}:${port}/api/tasks?user_id=${this.authStore.user.id}`
 
         let result = await axios.get(url);
         console.warn(result)

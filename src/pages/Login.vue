@@ -39,7 +39,7 @@
           let protocol = projectConfig.protocol
           let host = projectConfig.host
           let port = projectConfig.port
-          let url = `${protocol}://${host}/api/auth/login`
+          let url = `${protocol}://${host}:${port}/api/auth/login`
           
           const res = await axios.post(url, {
             email: this.email,
