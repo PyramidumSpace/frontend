@@ -14,3 +14,5 @@
 ![Tasks](./docs/resources/tasks.png "Tasks")
 ## Create Task page
 ![Create Task](./docs/resources/create-task.png "Create Task")
+## Motivator page
+![Motivator](./docs/resources/motivator.png "Motivator")
