@@ -2,7 +2,7 @@
   import axios from 'axios'
   
   import CreateTaskForm from '../components/CreateTaskForm.vue';
-  
+  import {useAuthStore } from "../stores/Auth.js";
   import { useTaskStore } from '../stores/Task.js';
   import {projectConfig} from "../common/index.js";
   
@@ -21,8 +21,9 @@
     setup() {
       document.title = 'Create Task | Pyramidum'
       
+      const userStore = useAuthStore()
       const taskStore = useTaskStore()
-      return { taskStore }
+      return { userStore, taskStore }
     },
     
     methods: {
@@ -45,7 +46,7 @@
             progress_status: this.taskStore.progressStatus,
             is_important: this.taskStore.isImportant,
             is_urgent: this.taskStore.isUrgent,
-            owner_id: this.taskStore.ownerId,
+            owner_id: this.userStore.user.id,
             parent_id: null,
             possible_deadline: this.taskStore.deadline,
             weight: this.taskStore.weight

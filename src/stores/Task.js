@@ -7,7 +7,7 @@ export const useTaskStore = defineStore('task', {
         external_images: [],
         isImportant: false,
         isUrgent: false,
-        deadline: "",
+        deadline: "2023-06-30T23:59:59Z",
         progressStatus: 0,
         ownerId: 0,
         parentId: "",
