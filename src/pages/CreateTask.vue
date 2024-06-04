@@ -37,8 +37,8 @@
           let port = projectConfig.port
           let url = `${protocol}://${host}:${port}/api/tasks`
           
-          const res = await axios.post(url, {
-            header: this.taskStore.name,
+          let payload = {
+            header: this.taskStore.header,
             text: this.taskStore.text,
             external_images: [],
             deadline: this.taskStore.deadline,
@@ -47,9 +47,13 @@
             is_urgent: this.taskStore.isUrgent,
             owner_id: this.taskStore.ownerId,
             parent_id: null,
-            possible_deadline: this.taskStore.possibleDeadline,
+            possible_deadline: this.taskStore.deadline,
             weight: this.taskStore.weight
-          }).catch(function (error) {})
+          }
+          
+          console.log(payload)
+          
+          const res = await axios.post(url, payload).catch(function (error) {})
           
           console.debug(res)
           
