@@ -1,4 +1,4 @@
-# frontend
+# Pyramidum Space Frontend
 
 ## Index page
 ![Index](./docs/resources/index.png "Index")
